@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.alfabank.api.exam.service.CurrencyService;
 import ru.alfabank.api.exam.service.GifService;
 
 @Slf4j
@@ -15,10 +16,11 @@ import ru.alfabank.api.exam.service.GifService;
 @RequiredArgsConstructor
 public class GifController {
 
-    private final GifService service;
+    private final GifService gifService;
+    private final CurrencyService currencyService;
 
     @GetMapping("/")
     public ResponseEntity<String> getGif() {
-        return new ResponseEntity<>(service.getGif(), HttpStatus.OK);
+        return currencyService.getActualRates()>currencyService.getHistoricalRates() ? new ResponseEntity<>(gifService.getRichGif(), HttpStatus.OK) : new ResponseEntity<>(gifService.getBrokeGif(), HttpStatus.OK);
     }
 }

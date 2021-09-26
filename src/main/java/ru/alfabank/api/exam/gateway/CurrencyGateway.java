@@ -14,11 +14,11 @@ import ru.alfabank.api.exam.config.FeignConfig;
 )
 public interface CurrencyGateway {
     @GetMapping(value = "/latest.json")
-    ResponseEntity getActualRates (
+    Object getActualRates (
             @RequestParam(value = "app_id", required = false, defaultValue = "${currency.id}") String appId
     );
 
-    @GetMapping(value = "/historical.json/{currDate}")
+    @GetMapping(value = "/historical/{currDate}.json")
     Object getHistoricalRates (
             @PathVariable("currDate") String currDate,
             @RequestParam(value = "app_id", required = false, defaultValue = "${currency.id}") String appId
