@@ -1,7 +1,6 @@
 package ru.alfabank.api.exam.gateway;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ class CurrencyGatewayTest {
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", APPLICATION_JSON_VALUE)
                         .withBody(getFileAsString("currencyGetSuccess.json"))));
 
-        var response = mapper.convertValue(currencyGateway.getActualRates("d01585797b65414a88870309e136d488"), GetRatesInfo.class);
+        var response = currencyGateway.getActualRates("someID");
 
         assertEquals(response.getRates().get("RUB"), 72.76475);
     }
