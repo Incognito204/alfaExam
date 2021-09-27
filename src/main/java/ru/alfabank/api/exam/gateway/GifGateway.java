@@ -7,8 +7,7 @@ import ru.alfabank.api.exam.model.GetGifInfo;
 
 @FeignClient(
         name = "gifGateway",
-        url = "${gif.host}",
-        configuration = FeignConfig.class
+        url = "${gif.host}"
 )
 public interface GifGateway {
     @GetMapping(value = "/random")

@@ -20,7 +20,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
 @RunWith(SpringRunner.class)
-@AutoConfigureWireMock(port = 0)
+@AutoConfigureWireMock
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CurrencyGatewayTest {
@@ -28,17 +28,10 @@ class CurrencyGatewayTest {
     @Autowired
     private CurrencyGateway currencyGateway;
 
-    @Autowired
-    private ObjectMapper mapper;
-
-    private static String getFileAsString(String title) throws IOException {
-        return new String(Files.readAllBytes(Paths.get("src/test/resources/responses/" + title)));
-    }
-
     @Test
     void getActualRatesSuccess() throws IOException {
         stubFor(get(urlPathEqualTo("/latest.json"))
-                .withQueryParam("app_id", equalTo("d01585797b65414a88870309e136d488"))
+                .withQueryParam("app_id", equalTo("someID"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", APPLICATION_JSON_VALUE)
                         .withBody(getFileAsString("currencyGetSuccess.json"))));
 
@@ -50,14 +43,16 @@ class CurrencyGatewayTest {
     @Test
     void getHistoricalRatesSuccess() throws IOException {
         stubFor(get(urlPathEqualTo("/historical/2021-01-01.json"))
-                .withQueryParam("app_id", equalTo("d01585797b65414a88870309e136d488"))
+                .withQueryParam("app_id", equalTo("someID"))
                 .willReturn(aResponse().withStatus(200).withHeader("Content-Type", APPLICATION_JSON_VALUE)
                         .withBody(getFileAsString("currencyHistoricalGetSuccess.json"))));
 
-        var response = mapper.convertValue(currencyGateway.getHistoricalRates("2021-01-01", "d01585797b65414a88870309e136d488"), GetRatesInfo.class);
+        var response = currencyGateway.getHistoricalRates("2021-01-01", "someID");
 
         assertEquals(response.getRates().get("RUB"), 73.945);
     }
 
-
+    private static String getFileAsString(String title) throws IOException {
+        return new String(Files.readAllBytes(Paths.get("src/test/resources/responses/" + title)));
+    }
 }

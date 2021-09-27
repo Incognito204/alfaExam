@@ -8,8 +8,7 @@ import ru.alfabank.api.exam.model.GetRatesInfo;
 
 @FeignClient(
         name = "currencyRatesGateway",
-        url = "${currency.host}",
-        configuration = FeignConfig.class
+        url = "${currency.host}"
 )
 public interface CurrencyGateway {
     @GetMapping(value = "/latest.json")
