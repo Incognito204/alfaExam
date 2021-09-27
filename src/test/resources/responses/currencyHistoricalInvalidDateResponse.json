@@ -1,0 +1,6 @@
+{
+  "error": true,
+  "status": 400,
+  "message": "invalid_date",
+  "description": "Historical API queries require a valid date in the format `YYYY-MM-DD.json`. Please see our documentation at https://openexchangerates.org/documentation/, or contact support@openexchangerates.org."
+}
