@@ -23,7 +23,7 @@ public class CurrencyService {
 
     public double getActualRates() {
         var rates = mapper.convertValue(currencyGateway.getActualRates("d01585797b65414a88870309e136d488"), GetRatesInfo.class);
-        return Double.parseDouble(rates.getData().get("RUB").toString());
+        return rates.getRates().get("RUB");
     }
 
     public double getHistoricalRates() {
@@ -33,6 +33,6 @@ public class CurrencyService {
         String text = yesterday.format(formatters);
         log.info(text);
         var rates = mapper.convertValue(currencyGateway.getHistoricalRates(text,"d01585797b65414a88870309e136d488"), GetRatesInfo.class);
-        return Double.parseDouble(rates.getData().get("RUB").toString());
+        return rates.getRates().get("RUB");
     }
 }

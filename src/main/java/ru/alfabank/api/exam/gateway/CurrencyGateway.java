@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.alfabank.api.exam.config.FeignConfig;
+import ru.alfabank.api.exam.model.GetRatesInfo;
 
 @FeignClient(
         name = "currencyRatesGateway",
@@ -14,7 +15,7 @@ import ru.alfabank.api.exam.config.FeignConfig;
 )
 public interface CurrencyGateway {
     @GetMapping(value = "/latest.json")
-    Object getActualRates (
+    GetRatesInfo getActualRates (
             @RequestParam(value = "app_id", required = false, defaultValue = "${currency.id}") String appId
     );
 
