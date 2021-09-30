@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.alfabank.api.exam.gateway.CurrencyGateway;
 import ru.alfabank.api.exam.gateway.GifGateway;
-import ru.alfabank.api.exam.util.BadTokenException;
+import ru.alfabank.api.exam.model.exception.BadTokenException;
 
 import java.io.IOException;
 import java.nio.file.Files;
