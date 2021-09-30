@@ -31,8 +31,14 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'com.github.tomakehurst:wiremock-standalone:2.27.2'
+    testImplementation "org.springframework.cloud:spring-cloud-contract-wiremock:3.0.3"
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testCompile "com.github.tomakehurst:wiremock-jre8:2.31.0"
+
 }
 
 test {
     useJUnitPlatform()
+    systemProperty 'spring.profiles.active', 'test'
 }

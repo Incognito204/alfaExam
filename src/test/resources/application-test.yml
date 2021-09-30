@@ -1,0 +1,6 @@
+currency:
+  host: localhost:${wiremock.server.port}
+  id: someID
+gif:
+  host: localhost:${wiremock.server.port}
+  id: someID

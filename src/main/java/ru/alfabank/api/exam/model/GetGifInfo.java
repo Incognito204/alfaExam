@@ -4,19 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class GetGifInfo {
-
-   // @NotNull Long status;
-
-   // @NotNull String message;
-
-    GetGifInfo(){}
-
     @JsonProperty("data")
-    JsonNode data;
+    private JsonNode data;
+    private Map<String, String> meta;
 }
