@@ -43,6 +43,21 @@ public class StubsSetup {
                         .withBody(getFileAsString("currencyHistoricalInvalidDateResponse.json"))));
     }
 
+    public static void getGifSuccessRequest() throws IOException {
+        stubFor(get(urlPathEqualTo("/random"))
+                .withQueryParam("api_key", equalTo("someID"))
+                .withQueryParam("tag", equalTo("rich"))
+                .willReturn(aResponse().withStatus(200).withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody(getFileAsString("gifSuccessResponse.json"))));
+    }
+
+    public static void getGifBadAppIdRequest() throws IOException {
+        stubFor(get(urlPathEqualTo("/random"))
+                .withQueryParam("api_key", equalTo("someID1"))
+                .withQueryParam("tag", equalTo("rich"))
+                .willReturn(aResponse().withStatus(403).withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody(getFileAsString("gifBadAppIdResponse.json"))));
+    }
 
     private static String getFileAsString(String title) throws IOException {
         return new String(Files.readAllBytes(Paths.get("src/test/resources/responses/" + title)));

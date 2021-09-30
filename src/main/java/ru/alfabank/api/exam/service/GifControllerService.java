@@ -19,7 +19,7 @@ public class GifControllerService {
     }
 
     private double getActualRates() {
-        var rates = currencyGateway.getActualRates("d01585797b65414a88870309e136d487");
+        var rates = currencyGateway.getActualRates("d01585797b65414a88870309e136d488");
         return rates.getRates().get("RUB");
     }
 
